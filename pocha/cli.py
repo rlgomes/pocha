@@ -12,9 +12,8 @@ import discover
 import runner
 
 from reporters import get_reporter
-from version import VERSION
 
-@click.version_option(prog_name='pocha', version=VERSION)
+@click.version_option(prog_name='pocha', version='0.2')
 @click.command()
 @click.argument('path', default='test')
 @click.option('--reporter', '-r',

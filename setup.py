@@ -4,8 +4,6 @@ setup.py
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
-from pocha.version import VERSION
-
 class PochaTestCommand(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
@@ -18,7 +16,7 @@ class PochaTestCommand(TestCommand):
 
 setup(
     name='pocha',
-    version=VERSION,
+    version='0.2',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',
