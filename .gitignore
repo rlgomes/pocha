@@ -1,0 +1,5 @@
+*.pyc
+env/
+build/
+dist/
+pocha.egg-info/

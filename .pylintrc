@@ -1,0 +1,10 @@
+[MESSAGES CONTROL]
+disable=C0103, R0913
+
+[VARIABLES]
+init-import=no
+#additional-builtins=
+
+[TYPECHECK]
+ignored-modules = expect,sh
+ignored-classes = expect,sh
