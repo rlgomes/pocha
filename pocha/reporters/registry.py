@@ -1,3 +1,7 @@
+"""
+reporters register module
+"""
+
 from pocha.reporters.dot import DotReporter
 from pocha.reporters.spec import SpecReporter
 from pocha.reporters.xunit import XUnitReporter

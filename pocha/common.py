@@ -4,7 +4,7 @@ pocha decorator module
 
 from collections import OrderedDict
 
-from util import EasyDict
+from pocha.util import EasyDict
 
 TESTS = OrderedDict()
 
