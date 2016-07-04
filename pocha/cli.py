@@ -13,7 +13,7 @@ from pocha import runner
 
 from reporters.registry import get_reporter
 
-@click.version_option(prog_name='pocha', version='0.5')
+@click.version_option(prog_name='pocha', version='0.5.1')
 @click.command()
 @click.argument('path', default='test')
 @click.option('--reporter', '-r',

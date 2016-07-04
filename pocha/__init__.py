@@ -2,10 +2,10 @@
 main init module
 """
 
-import cli
-import discover
-import reporters
-import runner
-import util
+from pocha import cli
+from pocha import discover
+from pocha import reporters
+from pocha import runner
+from pocha import util
 
-from common import describe, it
+from pocha.common import describe, it
