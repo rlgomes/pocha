@@ -4,9 +4,7 @@ pocha runner module
 
 import sys
 
-import pocha
-
-from util import EasyDict
+from pocha.util import EasyDict
 
 def run_tests(tests, reporter):
     reporter.beforeTests(sys.stdout)

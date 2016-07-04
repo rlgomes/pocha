@@ -2,7 +2,6 @@
 base pocha reporter
 """
 
-
 class Reporter(object):
 
     def beforeTests(self, stdout):

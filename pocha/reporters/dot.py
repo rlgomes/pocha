@@ -6,7 +6,7 @@ spec pocha reporter
 import time
 import traceback
 
-from base import Reporter
+from pocha.reporters.base import Reporter
 from colored import fg, attr
 
 _pass = fg('green')

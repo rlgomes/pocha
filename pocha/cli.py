@@ -8,12 +8,12 @@ import sys
 
 import click
 
-import discover
-import runner
+from pocha import discover
+from pocha import runner
 
-from reporters import get_reporter
+from reporters.registry import get_reporter
 
-@click.version_option(prog_name='pocha', version='0.4.1')
+@click.version_option(prog_name='pocha', version='0.5')
 @click.command()
 @click.argument('path', default='test')
 @click.option('--reporter', '-r',

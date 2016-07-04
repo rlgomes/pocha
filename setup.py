@@ -16,7 +16,7 @@ class PochaTestCommand(TestCommand):
 
 setup(
     name='pocha',
-    version='0.4.1',
+    version='0.5',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',

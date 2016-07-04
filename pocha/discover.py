@@ -8,7 +8,7 @@ import imp
 
 from collections import OrderedDict
 
-import pocha
+from pocha import common
 
 
 def __load_modules(path):
@@ -79,4 +79,4 @@ def search(path, expression):
     for module in modules:
         imp.load_source('foo', module)
     
-    return filter_tests(pocha.TESTS, expression)
+    return filter_tests(common.TESTS, expression)

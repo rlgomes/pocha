@@ -10,7 +10,7 @@ from xml.etree.ElementTree import Element, SubElement
 from xml.etree import ElementTree
 from xml.dom import minidom
 
-from base import Reporter
+from pocha.reporters.base import Reporter
 
 
 # taken from https://gist.github.com/zlalanne/5711847
