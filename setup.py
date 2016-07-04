@@ -1,14 +1,18 @@
 """
 setup.py
 """
+import os
+
 from setuptools import setup, find_packages
 from setuptools.command.test import test as TestCommand
 
 class PochaTestCommand(TestCommand):
+
     def finalize_options(self):
         TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
+        os.environ['PYTHONPATH'] = '.' + os.pathsep + os.environ.get('PYTHONPATH','')
 
     def run_tests(self):
         from pocha.cli import cli
