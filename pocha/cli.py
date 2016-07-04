@@ -30,7 +30,7 @@ def cli(path, reporter, expression):
             sys.exit(1)
 
     else:
-        raise Exception('%s does not exist' % path)
+        raise click.BadParameter('"%s" not found' % path, param_hint='path')
 
 if __name__ == '__main__':
     cli()
