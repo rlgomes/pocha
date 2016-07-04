@@ -11,12 +11,12 @@ class PochaTestCommand(TestCommand):
         self.test_suite = True
 
     def run_tests(self):
-        from pocha import cli
+        from pocha.cli import cli
         cli()
 
 setup(
     name='pocha',
-    version='0.4',
+    version='0.4.1',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',
