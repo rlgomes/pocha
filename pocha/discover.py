@@ -45,28 +45,29 @@ class FalseyDict(dict):
 
 
 def filter_tests(tests, expression):
-    filtered_tests = tests.copy()
+    filtered_tests = OrderedDict()
 
-    for (key, thing) in filtered_tests.items():
+    for (key, thing) in tests.items():
         if thing.only:
             return OrderedDict({
                 thing.name: thing
             })
 
         if expression is None:
+            filtered_tests[key] = thing
             continue
 
         if thing.type == 'test':
             global_tags = FalseyDict(thing.tags)
 
-            if not eval(expression, global_tags):
-                del filtered_tests[key]
+            if eval(expression, global_tags):
+                filtered_tests[key] = thing
 
         elif thing.type == 'suite':
             thing.tests = filter_tests(thing.tests, expression)
 
-            if len(thing.tests) == 0:
-                del filtered_tests[key]
+            if len(thing.tests) != 0:
+                filtered_tests[key] = thing
 
     return filtered_tests
 

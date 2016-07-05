@@ -17,7 +17,8 @@ def pocha_cli():
         cmd = sh.python('pocha/cli.py',
                         'test/input/only_its.py',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ third it
 
   1 passing \(\d+ms\)
@@ -30,7 +31,8 @@ def pocha_cli():
                         'test/input/only_its.py',
                         '--filter', 'first',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ third it
 
   1 passing \(\d+ms\)
@@ -42,7 +44,8 @@ def pocha_cli():
         cmd = sh.python('pocha/cli.py',
                         'test/input/only_describe.py',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   second describe
     ✓ third it
     ✓ fourth it
@@ -50,5 +53,3 @@ def pocha_cli():
   2 passing \(\d+ms\)
 
 ''')
-
-
