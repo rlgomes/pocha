@@ -1,5 +1,7 @@
 # Pocha - mocha for python
 
+[![Build Status](https://travis-ci.org/rlgomes/pocha.svg?branch=master)](https://travis-ci.org/rlgomes/pocha)
+
 *pocha* was created after spending sometime working in nodejs and finding
 that [mocha](https://github.com/mochajs/mocha) made testing very easy in
 *nodejs* and there wasn't a similar option for python. `pocha` isn't an
