@@ -18,7 +18,8 @@ def pocha_cli():
                         'test/input/tagged_its.py',
                         '--filter', 'third',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ third it
 
   1 passing \(\d+ms\)
@@ -31,7 +32,8 @@ def pocha_cli():
                         'test/input/tagged_its.py',
                         '--filter', 'edge',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ first it
   ✓ third it
 
@@ -45,7 +47,8 @@ def pocha_cli():
                         'test/input/tagged_its.py',
                         '--filter', 'first or second',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ first it
   ✓ second it
 
@@ -59,7 +62,8 @@ def pocha_cli():
                         'test/input/tagged_its.py',
                         '--filter', 'first and edge',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ first it
 
   1 passing \(\d+ms\)
@@ -72,7 +76,8 @@ def pocha_cli():
                         'test/input/tagged_its.py',
                         '--filter', 'not middle',
                         _tty_out=False)
-        expect(cmd.stdout).to.match('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   ✓ first it
   ✓ third it
 

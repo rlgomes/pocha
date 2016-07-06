@@ -21,12 +21,12 @@ def CDATA(text=None):
 
 ElementTree._original_serialize_xml = ElementTree._serialize_xml
 
-def _serialize_xml(write, elem, encoding, qnames, namespaces):
+def _serialize_xml(write, elem, *args, **kwargs):
     if elem.tag == '![CDATA[':
         write('<%s%s]]>' % (elem.tag, elem.text))
         return
 
-    return ElementTree._original_serialize_xml(write, elem, encoding, qnames, namespaces)
+    return ElementTree._original_serialize_xml(write, elem, *args, **kwargs)
 
 ElementTree._serialize_xml = ElementTree._serialize['xml'] = _serialize_xml
 

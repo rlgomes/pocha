@@ -15,11 +15,13 @@ def cli_tests():
                         'inexistent_path',
                         _ok_code=[2],
                         _tty_out=False)
-        expect(cmd.stderr).to.eq('''Usage: cli.py [OPTIONS] [PATH]
+        stderr = cmd.stderr.decode('utf-8')
+        expect(stderr).to.eq('''Usage: cli.py [OPTIONS] [PATH]
 
 Error: Invalid value for path: "inexistent_path" not found
 ''')
-        expect(cmd.stdout).to.eq('')
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.eq('')
 
 
     @it('fails when provided an invalid reporter')
@@ -28,11 +30,13 @@ Error: Invalid value for path: "inexistent_path" not found
                         '--reporter', 'bananas',
                         _ok_code=[2],
                         _tty_out=False)
-        expect(cmd.stderr).to.eq('''Usage: cli.py [OPTIONS] [PATH]
+        stderr = cmd.stderr.decode('utf-8')
+        expect(stderr).to.eq('''Usage: cli.py [OPTIONS] [PATH]
 
 Error: Invalid value for "--reporter" / "-r": invalid choice: bananas. (choose from spec, dot, xunit)
 ''')
-        expect(cmd.stdout).to.eq('')
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.eq('')
 
     @it('can display the help menu')
     def _():
@@ -40,7 +44,8 @@ Error: Invalid value for "--reporter" / "-r": invalid choice: bananas. (choose f
                         '--help',
                         _ok_code=[0],
                         _tty_out=False)
-        expect(cmd.stdout).to.contain('''Usage: cli.py [OPTIONS] [PATH]
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.contain('''Usage: cli.py [OPTIONS] [PATH]
 
 Options:
   -r, --reporter [spec|dot|xunit]
@@ -48,7 +53,8 @@ Options:
   --version                       Show the version and exit.
   --help                          Show this message and exit.
 ''')
-        expect(cmd.stderr).to.eq('')
+        stderr = cmd.stderr.decode('utf-8')
+        expect(stderr).to.eq('')
 
     @it('can run a test suite')
     def _():
@@ -56,7 +62,8 @@ Options:
                         'test/input/describe_with_multiple_passing_it.py',
                         _ok_code=[0],
                         _tty_out=False)
-        expect(cmd.stdout).to.eq('''
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.eq(u'''
   top level describe
     ✓ can run a passing it
     ✓ can run another passing it
@@ -64,4 +71,5 @@ Options:
   2 passing (0ms)
 
 ''')
-        expect(cmd.stderr).to.eq('')
+        stderr = cmd.stderr.decode('utf-8')
+        expect(stderr).to.eq('')

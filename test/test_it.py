@@ -18,7 +18,8 @@ def pocha_cli():
             cmd = sh.python('pocha/cli.py',
                             'test/input/single_passing_it.py',
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   ✓ can run a single passing it
 
   1 passing \(\d+ms\)
@@ -32,7 +33,8 @@ def pocha_cli():
                             'test/input/single_failing_it.py',
                             _ok_code=[1],
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   1\) can run a single failing it
 
   0 passing \(\d+ms\)
@@ -51,7 +53,8 @@ def pocha_cli():
                             'test/input/mixed_its.py',
                             _ok_code=[1],
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   ✓ can run a passing it
   1\) can run a failing it
   ✓ can run another passing it
@@ -74,7 +77,8 @@ def pocha_cli():
                             '--reporter', 'dot',
                             'test/input/single_passing_it.py',
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   .
 
   1 passing \(\d+ms\)
@@ -88,7 +92,8 @@ def pocha_cli():
                             'test/input/single_failing_it.py',
                             _ok_code=[1],
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   .
 
   0 passing \(\d+ms\)
@@ -108,7 +113,8 @@ def pocha_cli():
                             'test/input/mixed_its.py',
                             _ok_code=[1],
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   ...
 
   2 passing \(\d+ms\)
@@ -127,7 +133,8 @@ def pocha_cli():
                             '--reporter', 'dot',
                             'test/input/dynamically_created_its.py',
                             _tty_out=False)
-            expect(cmd.stdout).to.match('''
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
   .....
 
   5 passing \(\d+ms\)
@@ -143,17 +150,18 @@ def pocha_cli():
                             'test/input/single_passing_it.py',
                             _tty_out=False)
 
-            expect(cmd.stdout).to.have.xpath('./testsuite[' +
-                                             '@name="Pocha Tests" and ' +
-                                             '@tests="1" and ' +
-                                             '@errors="0" and ' +
-                                             '@failures="0" and ' +
-                                             '@skip="0"]')
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.have.xpath('./testsuite[' +
+                                         '@name="Pocha Tests" and ' +
+                                         '@tests="1" and ' +
+                                         '@errors="0" and ' +
+                                         '@failures="0" and ' +
+                                         '@skip="0"]')
 
-            expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                             '@name="can run a single passing it" and ' +
-                                             '@classname="" and ' +
-                                             '@time="0.000"]')
+            expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                         '@name="can run a single passing it" and ' +
+                                         '@classname="" and ' +
+                                         '@time="0.000"]')
 
 
         @it('can run a test with a single failing @it')
@@ -164,17 +172,18 @@ def pocha_cli():
                             _ok_code=[1],
                             _tty_out=False)
 
-            expect(cmd.stdout).to.have.xpath('./testsuite[' +
-                                             '@name="Pocha Tests" and ' +
-                                             '@tests="1" and ' +
-                                             '@errors="0" and ' +
-                                             '@failures="1" and ' +
-                                             '@skip="0"]')
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.have.xpath('./testsuite[' +
+                                         '@name="Pocha Tests" and ' +
+                                         '@tests="1" and ' +
+                                         '@errors="0" and ' +
+                                         '@failures="1" and ' +
+                                         '@skip="0"]')
 
             # XXX: should find a way to validate the stacktrace
-            expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                             '@name="can run a single failing it" and ' +
-                                             '@classname=""]/error')
+            expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                         '@name="can run a single failing it" and ' +
+                                         '@classname=""]/error')
 
         @it('can run a test with mixed @its')
         def _():
@@ -183,25 +192,26 @@ def pocha_cli():
                             'test/input/mixed_its.py',
                             _ok_code=[1],
                             _tty_out=False)
-            expect(cmd.stdout).to.have.xpath('./testsuite[' +
-                                             '@name="Pocha Tests" and ' +
-                                             '@tests="3" and ' +
-                                             '@errors="0" and ' +
-                                             '@failures="1" and ' +
-                                             '@skip="0"]')
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.have.xpath('./testsuite[' +
+                                         '@name="Pocha Tests" and ' +
+                                         '@tests="3" and ' +
+                                         '@errors="0" and ' +
+                                         '@failures="1" and ' +
+                                         '@skip="0"]')
 
-            expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                             '@name="can run a passing it" and ' +
-                                             '@classname=""]')
+            expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                         '@name="can run a passing it" and ' +
+                                         '@classname=""]')
 
             # XXX: should find a way to validate the stacktrace
-            expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                             '@name="can runa a failing it" and ' +
-                                             '@classname=""]/error')
+            expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                         '@name="can runa a failing it" and ' +
+                                         '@classname=""]/error')
 
-            expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                             '@name="can run another passing it" and ' +
-                                             '@classname=""]')
+            expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                         '@name="can run another passing it" and ' +
+                                         '@classname=""]')
 
 
         @it('can run dynamically created @its')
@@ -211,14 +221,15 @@ def pocha_cli():
                             'test/input/dynamically_created_its.py',
                             _tty_out=False)
 
-            expect(cmd.stdout).to.have.xpath('./testsuite[' +
-                                             '@name="Pocha Tests" and ' +
-                                             '@tests="5" and ' +
-                                             '@errors="0" and ' +
-                                             '@failures="0" and ' +
-                                             '@skip="0"]')
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.have.xpath('./testsuite[' +
+                                         '@name="Pocha Tests" and ' +
+                                         '@tests="5" and ' +
+                                         '@errors="0" and ' +
+                                         '@failures="0" and ' +
+                                         '@skip="0"]')
 
             for index in range(1, 6):
-                expect(cmd.stdout).to.have.xpath('./testsuite/testcase[' +
-                                                 '@name="passing it #%d" and ' % index+
-                                                 '@classname=""]')
+                expect(stdout).to.have.xpath('./testsuite/testcase[' +
+                                             '@name="passing it #%d" and ' % index+
+                                             '@classname=""]')
