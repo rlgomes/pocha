@@ -18,14 +18,18 @@ class PochaTestCommand(TestCommand):
         from pocha.cli import cli
         cli()
 
+def load(filename):
+    with open(filename, 'r') as input_file:
+        return input_file.read().split('\n')
+
 setup(
     name='pocha',
     version='0.6.1',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',
-    install_requires=open('requirements.txt').read().split('\n'),
-    tests_require=open('test-requirements.txt').read().split('\n'),
+    install_requires=load('requirements.txt'),
+    tests_require=load('test-requirements.txt'),
     cmdclass={'test': PochaTestCommand},
     test_suite='test',
     keywords=[''],
