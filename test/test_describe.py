@@ -22,7 +22,6 @@ def pocha_cli():
                             _tty_out=False)
             stdout = cmd.stdout.decode('utf-8')
             expect(stdout).to.match(u'''
-  an empty describe
 
   0 passing \(\d+ms\)
 
