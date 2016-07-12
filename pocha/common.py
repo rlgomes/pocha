@@ -3,17 +3,28 @@ pocha decorator module
 """
 
 from collections import OrderedDict
+from functools import wraps
 
 from pocha.util import EasyDict
 
 TESTS = OrderedDict()
 
 SUITE_STACK = [EasyDict({
+    'name': '__default__',
     'type': 'suite',
-    'tests': TESTS,
+    'tests': OrderedDict(),
     'skip': False,
-    'tags': {}
+    'only': False,
+    'tags': {},
+
+    'before': [],
+    'after': [],
+    'before_each': [],
+    'after_each': []
 })]
+
+# __default__ suite is created but never recorded as a suite
+TESTS['__default__'] = SUITE_STACK[0]
 
 
 def handle_tags(tags):
@@ -62,7 +73,12 @@ class describe(object):
             'tests': OrderedDict(),
             'only': self.only,
             'skip': self.skip,
-            'tags': self.tags
+            'tags': self.tags,
+
+            'before': [],
+            'after': [],
+            'before_each': [],
+            'after_each': []
         })
         SUITE_STACK[-1].tests[self.name] = suite
         SUITE_STACK.append(suite)
@@ -113,3 +129,45 @@ class it(object):
         })
         func.name = self.name
         return func
+
+
+def before(func):
+    """
+    decorator used to define a function to execute before the current suite is
+    executed
+    """
+    current_stack = SUITE_STACK[-1]
+    current_stack.before.append(func)
+    return func
+
+
+def after(func):
+    """
+    decorator used to define a function to execute after the current suite is
+    executed
+    """
+    current_stack = SUITE_STACK[-1]
+    current_stack.after.append(func)
+    return func
+
+
+def before_each(func):
+    """
+    decorator used to define a function to execute before each test case
+    """
+    current_stack = SUITE_STACK[-1]
+    current_stack.before_each.append(func)
+    return func
+
+
+def after_each(func):
+    """
+    decorator used to define a function to execute after each test case
+    """
+    current_stack = SUITE_STACK[-1]
+    current_stack.after_each.append(func)
+    return func
+
+# aliases
+beforeEach = before_each
+afterEach = after_each

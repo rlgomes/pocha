@@ -53,11 +53,11 @@ def filter_tests(tests, expression):
                 thing.name: thing
             })
 
-        if expression is None:
-            filtered_tests[key] = thing
-            continue
-
         if thing.type == 'test':
+            if expression is None:
+                filtered_tests[key] = thing
+                continue
+
             global_tags = FalseyDict(thing.tags)
 
             if eval(expression, global_tags):
@@ -65,7 +65,7 @@ def filter_tests(tests, expression):
 
         elif thing.type == 'suite':
             thing.tests = filter_tests(thing.tests, expression)
-
+                
             if len(thing.tests) != 0:
                 filtered_tests[key] = thing
 
