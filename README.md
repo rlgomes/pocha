@@ -13,7 +13,7 @@ python easier and cleaner.
 ## Latest build on pypi
 
 ```bash
-pip install pocah
+pip install pocha
 ```
 
 ## From source
