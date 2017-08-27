@@ -34,7 +34,7 @@ setup(
     test_suite='test',
     keywords=[''],
     py_modules=['pocha'],
-    packages=find_packages(exclude=['tests']),
+    packages=find_packages(exclude=['test']),
 
     entry_points={
         'console_scripts': [
