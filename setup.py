@@ -23,7 +23,7 @@ def load(filename):
 
 setup(
     name='pocha',
-    version='0.9.0',
+    version='0.10.0',
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',
