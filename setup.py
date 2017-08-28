@@ -28,13 +28,16 @@ setup(
     author='Rodney Gomes',
     author_email='rodneygomes@gmail.com',
     url='',
+
     install_requires=load('requirements.txt'),
     tests_require=load('requirements-dev.txt'),
+
     cmdclass={'test': PochaTestCommand},
     test_suite='test',
     keywords=[''],
     py_modules=['pocha'],
     packages=find_packages(exclude=['tests']),
+
 
     entry_points={
         'console_scripts': [
