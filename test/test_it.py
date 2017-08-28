@@ -5,7 +5,8 @@ import sh
 from robber import expect
 
 from pocha import describe, it
-from test import util
+
+import util
 util.init()
 
 @describe('@it tests')

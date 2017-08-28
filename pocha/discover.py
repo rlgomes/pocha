@@ -80,7 +80,7 @@ def search(path, expression):
     # to run
     for module in modules:
         module_path = os.path.dirname(module)
-        sys.path.append(module_path)
+        sys.path.insert(0, module_path)
         try:
             imp.load_source('foo', module)
         finally:

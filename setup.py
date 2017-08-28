@@ -12,7 +12,6 @@ class PochaTestCommand(TestCommand):
         TestCommand.finalize_options(self)
         self.test_args = []
         self.test_suite = True
-        os.environ['PYTHONPATH'] = '.' + os.pathsep + os.environ.get('PYTHONPATH','')
 
     def run_tests(self):
         from pocha.cli import cli

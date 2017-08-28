@@ -2,7 +2,7 @@
 
 import sh
 
-import test.util
+import util
 
 from robber import expect
 

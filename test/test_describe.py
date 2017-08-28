@@ -5,12 +5,28 @@ import sh
 from robber import expect
 from pocha import describe, it
 
-from test import util
+import util
 util.init()
 
 
 @describe('@describe tests')
 def pocha_cli():
+
+    @it('can run test with local module import')
+    def local_module_import():
+            cmd = sh.python('pocha/cli.py',
+                            'test/input/describe_with_local_module_import.py',
+                            _ok_code=[0],
+                            _tty_out=False)
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
+  top level describe
+    ✓ can call out to a local module
+
+  1 passing \(.*ms\)
+
+''')
+
 
     @describe('spec reporter', tags=['spec'])
     def spec():
