@@ -29,7 +29,7 @@ setup(
     author_email='rodneygomes@gmail.com',
     url='',
     install_requires=load('requirements.txt'),
-    tests_require=load('test-requirements.txt'),
+    tests_require=load('requirements-dev.txt'),
     cmdclass={'test': PochaTestCommand},
     test_suite='test',
     keywords=[''],
