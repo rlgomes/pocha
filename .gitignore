@@ -1,4 +1,6 @@
 *.pyc
+.eggs/
+.ropeproject/
 env/
 build/
 dist/
