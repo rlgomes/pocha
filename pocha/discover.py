@@ -5,6 +5,7 @@ testing hierarchy as represented by the underlying tests.
 """
 import os
 import imp
+import sys
 
 from collections import OrderedDict
 
@@ -65,7 +66,7 @@ def filter_tests(tests, expression):
 
         elif thing.type == 'suite':
             thing.tests = filter_tests(thing.tests, expression)
-                
+
             if len(thing.tests) != 0:
                 filtered_tests[key] = thing
 
@@ -78,6 +79,11 @@ def search(path, expression):
     # load each module and then we'll have a complete list of the tests
     # to run
     for module in modules:
-        imp.load_source('foo', module)
-    
+        module_path = os.path.dirname(module)
+        sys.path.append(module_path)
+        try:
+            imp.load_source('foo', module)
+        finally:
+            sys.path.remove(module_path)
+
     return filter_tests(common.TESTS, expression)
