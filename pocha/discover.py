@@ -1,6 +1,6 @@
 """
-pocha test discovery module responsible for creating a dictionary containing the
-testing hierarchy as represented by the underlying tests.
+pocha test discovery module responsible for creating a dictionary containing
+the testing hierarchy as represented by the underlying tests.
 
 """
 import os
@@ -80,10 +80,12 @@ def search(path, expression):
     # to run
     for module in modules:
         module_path = os.path.dirname(module)
+        sys.path.insert(0, '.')
         sys.path.insert(0, module_path)
         try:
             imp.load_source('foo', module)
         finally:
+            sys.path.remove('.')
             sys.path.remove(module_path)
 
     return filter_tests(common.TESTS, expression)
