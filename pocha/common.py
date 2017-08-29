@@ -3,7 +3,6 @@ pocha decorator module
 """
 
 from collections import OrderedDict
-from functools import wraps
 
 from pocha.util import EasyDict
 
@@ -167,6 +166,7 @@ def after_each(func):
     current_stack = SUITE_STACK[-1]
     current_stack.after_each.append(func)
     return func
+
 
 # aliases
 beforeEach = before_each

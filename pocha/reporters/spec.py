@@ -4,11 +4,11 @@ spec pocha reporter
 """
 
 import time
-import traceback
 
 from colored import fg, attr
 
 from pocha.reporters.base import Reporter
+from pocha.util import print_failures
 
 _pass = fg('green')
 _fail = fg('red')
@@ -68,22 +68,7 @@ class SpecReporter(Reporter):
 
             stdout.write('\n')
             # list the tests in order with their associated stacktrace
-            for index in range(0, len(self.failures)):
-                (name, exc_info) = self.failures[index]
-                tb_lines = '\n'.join(traceback.format_tb(exc_info[2])[1:])
-                tb_lines = ['   %s' % line for line in tb_lines.split('\n') if line.strip() != '']
-                stdout.write('  %d) %s:\n' % (index + 1, name))
-                exception_name = exc_info[1].__class__.__name__
-                if stdout.isatty():
-                    stdout.write('     %s%s: %s%s\n' % (_fail, exception_name, exc_info[1], _reset))
-
-                else:
-                    stdout.write('     %s: %s\n' % (exception_name, exc_info[1]))
-                stdout.write('\n'.join(tb_lines))
-                stdout.write('\n')
-
-                if index < len(self.failures)-1:
-                    stdout.write('\n')
+            print_failures(self.failures, stdout)
 
         stdout.write('\n')
 

@@ -42,6 +42,21 @@ def pocha_cli():
 
 ''')
 
+    @it('can run test with local module relative from .. import Y')
+    def local_module_import():
+            cmd = sh.python('pocha/cli.py',
+                            'test/input/describe_with_local_module_relative_from_import.py',
+                            _ok_code=[0],
+                            _tty_out=False)
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.match(u'''
+  top level describe
+    ✓ can call out to a local module from import
+
+  1 passing \(.*ms\)
+
+''')
+
 
     @describe('spec reporter', tags=['spec'])
     def spec():

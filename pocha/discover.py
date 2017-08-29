@@ -83,7 +83,10 @@ def search(path, expression):
         sys.path.insert(0, '.')
         sys.path.insert(0, module_path)
         try:
-            imp.load_source('foo', module)
+            name = module.replace('/', '.')
+            if '.py' in name:
+                name = name[:name.index('.py')]
+            __import__(name)
         finally:
             sys.path.remove('.')
             sys.path.remove(module_path)
