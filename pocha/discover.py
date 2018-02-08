@@ -80,6 +80,13 @@ def search(path, expression):
     # to run
     for module in modules:
         module_path = os.path.dirname(module)
+
+        # handle special case of a relative reference to something in a parent
+        # directory
+        if module.startswith('..'):
+            sys.path.insert(0, '..')
+            module = module.replace('../', '')
+
         sys.path.insert(0, '.')
         sys.path.insert(0, module_path)
         try:

@@ -1,5 +1,6 @@
 # coding: utf-8
 
+import os
 import sh
 
 from robber import expect
@@ -14,12 +15,12 @@ def pocha_cli():
 
     @it('can run test with local module import')
     def local_module_import():
-            cmd = sh.python('pocha/cli.py',
-                            'test/input/describe_with_local_module_import.py',
-                            _ok_code=[0],
-                            _tty_out=False)
-            stdout = cmd.stdout.decode('utf-8')
-            expect(stdout).to.match(u'''
+        cmd = sh.python('pocha/cli.py',
+                        'test/input/describe_with_local_module_import.py',
+                        _ok_code=[0],
+                        _tty_out=False)
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   top level describe
     ✓ can call out to a local module import
 
@@ -29,12 +30,12 @@ def pocha_cli():
 
     @it('can run test with local module from X import Y')
     def local_module_import():
-            cmd = sh.python('pocha/cli.py',
-                            'test/input/describe_with_local_module_from_import.py',
-                            _ok_code=[0],
-                            _tty_out=False)
-            stdout = cmd.stdout.decode('utf-8')
-            expect(stdout).to.match(u'''
+        cmd = sh.python('pocha/cli.py',
+                        'test/input/describe_with_local_module_from_import.py',
+                        _ok_code=[0],
+                        _tty_out=False)
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
   top level describe
     ✓ can call out to a local module from import
 
@@ -44,8 +45,27 @@ def pocha_cli():
 
     @it('can run test with local module relative from .. import Y')
     def local_module_import():
-            cmd = sh.python('pocha/cli.py',
-                            'test/input/describe_with_local_module_relative_from_import.py',
+        cmd = sh.python('pocha/cli.py',
+                        'test/input/describe_with_local_module_relative_from_import.py',
+                        _ok_code=[0],
+                        _tty_out=False)
+        stdout = cmd.stdout.decode('utf-8')
+        expect(stdout).to.match(u'''
+  top level describe
+    ✓ can call out to a local module from import
+
+  1 passing \(.*ms\)
+
+''')
+
+
+    @it('can run test referenced from a parent directory')
+    def local_module_import():
+        cwd = os.getcwd()
+        try:
+            os.chdir('pocha')
+            cmd = sh.python('./cli.py',
+                            '../test/input/describe_with_local_module_relative_from_import.py',
                             _ok_code=[0],
                             _tty_out=False)
             stdout = cmd.stdout.decode('utf-8')
@@ -56,7 +76,8 @@ def pocha_cli():
   1 passing \(.*ms\)
 
 ''')
-
+        finally:
+            os.chdir(cwd)
 
     @describe('spec reporter', tags=['spec'])
     def spec():
