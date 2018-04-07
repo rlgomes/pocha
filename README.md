@@ -76,6 +76,52 @@ Which produces the following output:
 
 ```
 
+## Using before and after hooks
+
+There are decorators for running a method before/after all the tests have
+executed in a suite or also to run before/after each test in a suite. The
+`@before` and `@after` decorators are used to provide hooks to run before and
+after a whole suite and generally used for setting up or tearing down some
+fixture used by all the tests in suite.
+
+As an example the following:
+
+```python
+from pocha import after, before, describe, it
+
+@before
+def _():
+    print('before hook')
+
+@after
+def _():
+    print('after hook')
+
+@describe('suite')
+def _():
+
+    @it('test1')
+    def test1():
+        print('from test1')
+```
+
+Which as expected would produce the following when executed:
+
+```bash
+> pocha foo.py
+
+before hook
+  suite
+from test1
+    ✓ test1
+after hook
+
+  1 passing (0ms)
+```
+
+Then there are the `@before_each` and `@after_each` decorators which create
+hooks that will run before/after each test in a suite.
+
 # Builtin reporters
 
 You can currently choose from 3 different builtin reporters. Here are the
