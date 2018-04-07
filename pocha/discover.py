@@ -25,6 +25,9 @@ def __load_modules(path):
             return modules
 
         for filename in os.listdir(path):
+            if filename == '__init__.py':
+                continue
+
             modules += __load_modules(os.path.join(path, filename))
 
     return modules
@@ -87,8 +90,8 @@ def search(path, expression):
             sys.path.insert(0, '..')
             module = module.replace('../', '')
 
-        sys.path.insert(0, '.')
         sys.path.insert(0, module_path)
+        sys.path.insert(0, '.')
         try:
             name = module.replace('/', '.')
             if '.py' in name:
