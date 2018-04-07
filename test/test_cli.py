@@ -1,5 +1,7 @@
 # coding: utf-8
 
+import os
+
 import sh
 
 from robber import expect
@@ -71,5 +73,28 @@ Options:
   2 passing (0ms)
 
 ''')
+        stderr = cmd.stderr.decode('utf-8')
+        expect(stderr).to.eq('')
+
+    @it('can run a test suite with same name as test directory')
+    def _():
+        cwd = os.getcwd()
+        try:
+            os.chdir('test/input')
+            cmd = sh.python('../../pocha/cli.py',
+                            'foo/foo.py',
+                            _ok_code=[0],
+                            _tty_out=False)
+            stdout = cmd.stdout.decode('utf-8')
+            expect(stdout).to.eq(u'''
+  foo suite
+    ✓ foo test
+
+  1 passing (0ms)
+
+''')
+        finally:
+            os.chdir(cwd)
+
         stderr = cmd.stderr.decode('utf-8')
         expect(stderr).to.eq('')
