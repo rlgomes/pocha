@@ -189,7 +189,7 @@ def _():
     def _():
         assert abs(0) == 0
 
-	@it('can verify that abs works for positive numbers', tags=['positive'])
+    @it('can verify that abs works for positive numbers', tags=['positive'])
     def _():
         assert abs(1) == 1
 ```
@@ -227,7 +227,7 @@ def _():
     def _():
         assert abs(0) == 0
 
-	@it('can verify that abs works for positive numbers', skip=True)
+    @it('can verify that abs works for positive numbers', skip=True)
     def _():
         assert abs(1) == 1
 ```
@@ -264,7 +264,7 @@ def _():
     def _():
         assert abs(0) == 0
 
-	@it('can verify that abs works for positive numbers')
+    @it('can verify that abs works for positive numbers')
     def _():
         assert abs(1) == 1
 ```
